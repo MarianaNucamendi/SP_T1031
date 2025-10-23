@@ -1,8 +1,9 @@
 #include <iostream>
 #include "Monster.h"
+#include "Catalog.h"
 
 int main(){
-    Monster("juanin", 4, "a", 3, 4, "jeje");
-
+    std::cout << "";
+    Catalog a;
     return 0;
 }
