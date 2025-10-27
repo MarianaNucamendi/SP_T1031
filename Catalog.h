@@ -7,7 +7,8 @@ public:
     Catalog();
     ~Catalog();
 
-    bool loadMonsters();
+    bool loadMonsters(std::string csv);
+    Monster* selectRandomMonster();
 private:
     BinaryTree<Monster> monsterTree;
 };

@@ -1,8 +1,11 @@
 #include <iostream>
+#include <ctime>
 #include "BinaryTree.h"
 
 template <typename T>
-BinaryTree<T>::Node::Node(T nData) : data(nData), left(nullptr), right(nullptr) {}
+BinaryTree<T>::Node::Node(T nData) : data(nData), left(nullptr), right(nullptr), index(0) {
+    std::srand(std::time(nullptr));
+}
 
 template <typename T>
 BinaryTree<T>::BinaryTree() : root(nullptr) {}
@@ -171,4 +174,69 @@ void BinaryTree<T>::printRecursive(Node *node, int depth){
     
     if(node->left)
         printRecursive(node->left,depth+1);
+}
+
+template <typename T>
+bool BinaryTree<T>::setIndex(){
+    if(!root)
+        return false;
+    int index = 1;
+    return setIndexExecute(root, index);
+}
+
+template <typename T>
+bool BinaryTree<T>::setIndexExecute(Node *&node, int &index){
+    if(node->left)
+        setIndexExecute(node->left, index);
+
+    node->index = index;
+    index +=1;
+
+    if(node->right)
+        setIndexExecute(node->right, index);
+    
+    if(!node->left)
+        return true;
+    if(!node->right)
+        return true;
+    return false;
+}
+
+template <typename T>
+int BinaryTree<T>::nodeCount(){
+    if(!root)
+        return 0;
+    return nodeCountExecute(root);
+}
+
+template <typename T>
+int BinaryTree<T>::nodeCountExecute(Node *node){
+    if(!node)
+        return 0;
+    return 1 + nodeCountExecute(node->left) + nodeCountExecute(node->right);
+}
+
+template <typename T>
+T* BinaryTree<T>::randomNode(){
+    setIndex();
+    int n = nodeCount();
+
+    int nodeIndex = std::rand() %  n;
+    nodeIndex += 1;
+    return selectRandomNode(root, nodeIndex);
+}
+
+template <typename T>
+T* BinaryTree<T>::selectRandomNode(Node *node, int nodeIndex){
+    if(!node)
+        return nullptr;
+
+    if(node->index == nodeIndex)
+        return &(node->data);
+
+    if(node->index > nodeIndex)
+        return selectRandomNode(node->left, nodeIndex);
+    if(node->index < nodeIndex)
+        return selectRandomNode(node->right, nodeIndex);
+    return nullptr;
 }

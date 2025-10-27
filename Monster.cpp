@@ -1,6 +1,8 @@
 #include <string>
 #include "Monster.h"
 
+Monster::Monster(){}
+
 Monster::Monster(
     std::string name, 
     float cr, 
@@ -20,15 +22,43 @@ Monster::Monster(
 
 Monster::~Monster(){}
 
-bool Monster::operator<(const Monster &current){
-    return name < current.name;
+void Monster::setName(std::string newName){
+    name = newName;
 }
 
-bool Monster::operator>(const Monster &current){
-    return name > current.name;
+void Monster::setCr(float newCr){
+    cr = newCr;
 }
 
-std::ostream& operator<<(std::ostream& os,const Monster &current){
-    os << current.name;
+void Monster::setType(std::string newType){
+    type = newType;
+}
+
+void Monster::setSize(std::string newSize){
+    size = newSize;
+}
+
+void Monster::setAc(int newAc){
+    ac = newAc;
+}
+
+void Monster::setHp(int newHp){
+    hp = newHp;
+}
+
+void Monster::setAlign(std::string newAlign){
+    align = newAlign;
+}
+
+bool Monster::operator<(const Monster &monster){
+    return name < monster.name;
+}
+
+bool Monster::operator>(const Monster &monster){
+    return name > monster.name;
+}
+
+std::ostream& operator<<(std::ostream& os,const Monster &monster){
+    os << monster.name;
     return os;
 }

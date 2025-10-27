@@ -5,16 +5,16 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <ctime>
 
-Catalog::Catalog(){
-    loadMonsters();
+Catalog::Catalog(){}
 
+Catalog::~Catalog(){
+    monsterTree.clear();
 }
 
-Catalog::~Catalog() {}
-
-bool Catalog::loadMonsters(){
-    std::ifstream file("monsters.csv");
+bool Catalog::loadMonsters(std::string csv){
+    std::ifstream file(csv);
 
     if(!file.is_open())
         return false;
@@ -54,8 +54,10 @@ bool Catalog::loadMonsters(){
         monsterTree.insert(newMonster);
     }
 
-    monsterTree.print();
-
     file.close();
     return true;
+}
+
+Monster* Catalog::selectRandomMonster(){
+    return monsterTree.randomNode();
 }
