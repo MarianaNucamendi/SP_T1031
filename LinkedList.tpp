@@ -152,3 +152,34 @@ void LinkedList<T>::clear(){
     }
     head = nullptr;
 }
+
+template <typename T>
+bool LinkedList<T>::insertInOrder(T data){
+    if(!head){
+        insertHead(data);
+        return true;
+    }
+
+    Node *newNode = nullptr;
+    
+    newNode = new(std::nothrow) Node();
+    if(!newNode)
+        return false;
+
+    newNode->data = data;
+
+    Node *tmp = head;
+    T tmpData;
+
+    while(tmp->next){
+        if(newNode->data > tmp->data){
+            tmpData = tmp->data;
+            tmp->data = newNode->data;
+            newNode->data = tmpData;
+        }
+        tmp = tmp->next;
+    }
+
+    tmp->next = newNode;
+    return true;
+}

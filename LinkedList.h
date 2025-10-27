@@ -21,6 +21,8 @@ public:
 	bool deleteTail();
 	bool deleteNode(T data);
 
+	bool insertInOrder(T data);
+
     void printList();
     void clear();
 	
