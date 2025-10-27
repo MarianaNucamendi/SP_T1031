@@ -37,23 +37,41 @@ bool Catalog::loadMonsters(std::string csv){
         std::string align; 
 
         std::string cell;
+        int counter = 0;
 
-        std::getline(ss, name, ',');
-        std::getline(ss, cell, ',');
-        cr = std::stof(cell);
-        std::getline(ss, type, ',');
-        std::getline(ss, size, ',');
-        std::getline(ss, cell, ',');
-        ac = std::stoi(cell);
-        std::getline(ss, cell, ',');
-        hp = std::stoi(cell);
-        std::getline(ss, align, ',');
+        Monster newMonster;
 
-        Monster newMonster(name, cr, type, size, ac, hp, align);
-
-        monsterTree.insert(newMonster);
+        while(std::getline(ss, cell, ',')){
+            counter++;
+            switch(counter){
+                case 1:
+                    newMonster.setName(cell);
+                    break;
+                case 2:
+                    newMonster.setCr(std::stof(cell));
+                    break;      
+                case 3:
+                    newMonster.setType(cell);
+                    break;
+                case 4:
+                    newMonster.setSize(cell);
+                    break;
+                case 5:
+                    newMonster.setAc(std::stoi(cell));
+                    break;
+                case 6:
+                    newMonster.setHp(std::stoi(cell));
+                    break;
+                case 7:
+                    newMonster.setAlign(cell);
+                    break;
+            }
+        }
+       
+        if(counter == 7){
+            monsterTree.insert(newMonster);
+        }
     }
-
     file.close();
     return true;
 }
