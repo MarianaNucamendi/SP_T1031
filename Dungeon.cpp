@@ -1,6 +1,7 @@
 #include "Dungeon.h"
 #include "Room.h"
 #include "DoubleLinkedList.h"
+#include "Monster.h"
 
 #include <iostream>
 
@@ -10,8 +11,11 @@ Dungeon::~Dungeon(){
     roomList.clear();
 }
 
-void Dungeon::loadRoom(Room room){
-    roomList.insertTail(room);
+bool Dungeon::createRoom(Monster monster){
+    Room room(monster);
+    if(!roomList.insertTail(room))
+        return false;
+    return true;
 }
 
 void Dungeon::printRooms(){

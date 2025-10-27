@@ -2,12 +2,13 @@
 
 #include "DoubleLinkedList.h"
 #include "Room.h"
+#include "Monster.h"
 
 class Dungeon{
 public:
     Dungeon();
     ~Dungeon();
-    void loadRoom(Room room); // bool
+    bool createRoom(Monster monster);
     void printRooms();
 
 private:

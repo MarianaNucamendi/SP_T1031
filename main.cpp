@@ -17,9 +17,17 @@ int main(){
 
     std::cout << "Creando Dungeon...\n\n";
     for(int i = 0; i < N_ROOMS; i++){
-        Monster monster = *(catalog.selectRandomMonster());
-        Room room(monster);
-        dungeon.loadRoom(room);
+        Monster *monster = catalog.selectRandomMonster();
+        if(!monster){
+            std::cerr << "No se pudo obtener un monstruo del catálogo\n";
+            return -1;
+        }
+        Monster monsterCopy = *monster;
+
+        if(!dungeon.createRoom(monsterCopy)){
+            std::cerr << "No se puso insertar el cuarto al calabozo\n";
+            return -1;
+        }
     }
 
     dungeon.printRooms();
