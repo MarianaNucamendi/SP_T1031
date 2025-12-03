@@ -132,7 +132,7 @@ void LinkedList<T>::printList(){
 
     Node *temp = head;
     while(temp){
-        std::cout << temp->data << "\n";
+        std::cout << temp->data << " ";
         temp = temp->next;
     }
     std::cout << "\n";
@@ -182,4 +182,28 @@ bool LinkedList<T>::insertInOrder(T data){
 
     tmp->next = newNode;
     return true;
+}
+
+template <typename T>
+bool LinkedList<T>::exists(T data){
+    if(!head)
+        return false;
+    Node *tmp = head;
+    while(tmp){
+        if(tmp->data == data)
+            return true;
+        tmp = tmp->next;
+    }
+    return false;
+}
+
+template <typename T>
+unsigned int LinkedList<T>::getSize(){
+    unsigned int size = 0;
+    Node *tmp = head;
+    while(tmp){
+        size++;
+        tmp = tmp->next;
+    }
+    return size;
 }

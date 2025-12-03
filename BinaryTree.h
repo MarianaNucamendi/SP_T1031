@@ -37,6 +37,7 @@ private:
     int nodeCountExecute(Node *node);
 
     T* selectRandomNode(Node *node, int nodeIndex);
+    int n;
 
     Node *root;
 };

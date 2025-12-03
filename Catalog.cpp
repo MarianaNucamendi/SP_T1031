@@ -28,13 +28,6 @@ bool Catalog::loadMonsters(std::string csv){
 
     while(std::getline(file, line)){
         std::stringstream ss(line);
-        std::string name;
-        float cr;
-        std::string type;
-        std::string size;
-        int ac;
-        int hp;
-        std::string align; 
 
         std::string cell;
         int counter = 0;
@@ -69,7 +62,8 @@ bool Catalog::loadMonsters(std::string csv){
         }
        
         if(counter == 7){
-            monsterTree.insert(newMonster);
+            if(!monsterTree.insert(newMonster))
+                return false;
         }
     }
     file.close();

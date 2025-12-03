@@ -8,7 +8,7 @@ BinaryTree<T>::Node::Node(T nData) : data(nData), left(nullptr), right(nullptr),
 }
 
 template <typename T>
-BinaryTree<T>::BinaryTree() : root(nullptr) {}
+BinaryTree<T>::BinaryTree() :  n(0), root(nullptr) {}
 
 template <typename T>
 BinaryTree<T>::~BinaryTree() {
@@ -219,7 +219,7 @@ int BinaryTree<T>::nodeCountExecute(Node *node){
 template <typename T>
 T* BinaryTree<T>::randomNode(){
     setIndex();
-    int n = nodeCount();
+    n = nodeCount();
 
     int nodeIndex = std::rand() %  n;
     nodeIndex += 1;
